@@ -1,9 +1,10 @@
-name: Rudaw API
+name: Run Rudaw API Script
 
-on: [push]
+on: 
+  workflow_dispatch:
 
 jobs:
-  build:
+  run-script:
     runs-on: ubuntu-latest
 
     steps:
@@ -21,4 +22,8 @@ jobs:
         pip install requests beautifulsoup4
 
     - name: Run script
-      run: python .github/workflows/rudaw_api.py
+      id: run_script
+      run: python rudaw_api.py
+
+    - name: Output result
+      run: echo "${{ steps.run_script.outputs.result }}"
