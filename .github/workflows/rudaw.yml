@@ -22,8 +22,10 @@ jobs:
         pip install requests beautifulsoup4
 
     - name: Run script
-      id: run_script
-      run: python rudaw_api.py
+      run: python rudaw_api.py > output.txt
 
-    - name: Output result
-      run: echo "${{ steps.run_script.outputs.result }}"
+    - name: Upload output
+      uses: actions/upload-artifact@v2
+      with:
+        name: script-output
+        path: output.txt
